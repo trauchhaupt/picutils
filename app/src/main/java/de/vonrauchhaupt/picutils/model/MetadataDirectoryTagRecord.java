@@ -1,4 +1,4 @@
-package de.vonrauchhaupt.picutils;
+package de.vonrauchhaupt.picutils.model;
 
 import java.util.Comparator;
 import java.util.Objects;

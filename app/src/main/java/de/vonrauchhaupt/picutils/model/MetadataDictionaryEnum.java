@@ -1,4 +1,4 @@
-package de.vonrauchhaupt.picutils;
+package de.vonrauchhaupt.picutils.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,17 +24,19 @@ public enum MetadataDictionaryEnum {
     PHOTOSHOP("Photoshop"),
     JPEG_COMPONENT("JpegComment"),
     DUCKY("Ducky"),
+    NIKON_MAKERNOTE("Nikon Makernote"),
+    ADOBE_JPEG("Adobe JPEG"),
     EXIF_THUMBNAIL("Exif Thumbnail"),
+    INTEROPERABILITY("Interoperability"),
+    SONY_MAKERNOTE("Sony Makernote"),
+    PRINTIM("PrintIM"),
+    CANON_MAKERNOTE("Canon Makernote"),
     IPTC("IPTC");
     private static final Map<String, MetadataDictionaryEnum> byName = new HashMap<>();
     private final String name;
 
     MetadataDictionaryEnum(String name) {
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public static MetadataDictionaryEnum getByName(String name) {
@@ -44,5 +46,9 @@ public enum MetadataDictionaryEnum {
             }
         }
         return byName.get(name);
+    }
+
+    public String getName() {
+        return name;
     }
 }

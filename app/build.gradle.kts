@@ -28,6 +28,9 @@ dependencies {
 
     // build hashes out of images
     implementation(libs.jimage.hash)
+
+    // read xmp files
+    implementation(libs.xmpcore)
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

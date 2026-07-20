@@ -6,9 +6,11 @@ guava = "33.5.0-jre"
 junit = "4.13.2"
 metadata-extractor = "2.20.0"
 jimage-hash = "1.0.0"
+xmpcore = "6.1.11"
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 junit = { module = "junit:junit", version.ref = "junit" }
 metadata-extractor = { module= "com.drewnoakes:metadata-extractor", version.ref = "metadata-extractor" }
 jimage-hash = { module = "dev.brachtendorf:JImageHash", version.ref = "jimage-hash" }
+xmpcore = { module = "com.adobe.xmp:xmpcore", version.ref = "xmpcore" }
