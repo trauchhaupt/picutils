@@ -104,11 +104,10 @@ public class ScannerContextDto {
         Set<String> tagEnumsNotKnown = new HashSet<>();
         for (int i = 0; i < amountJpgFiles; i++) {
             Path path = allJpgFiles.get(i);
-            if (i % 100 == 0) {
+            if ((i + 1) % 100 == 0) {
                 System.out.println("Scanning '" + path + "' with file " + (i + 1) + "/" + amountJpgFiles);
-                writeFileInfoXml();
             }
-            if (i % 300 == 0)
+            if ((i + 1) % 300 == 0)
                 writeFileInfoXml();
             try {
                 ImageInformationDto existingInfo = imageInformationList.get(path);
