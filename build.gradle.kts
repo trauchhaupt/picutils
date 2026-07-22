@@ -41,11 +41,12 @@ java {
 }
 
 javafx {
-    version = "21.0.8"
+    version = "25.0.4"
     modules = listOf("javafx.base", "javafx.graphics", "javafx.swing", "javafx.controls")
 }
 
 application {
     // Define the main class for the application.
     mainClass = "de.vonrauchhaupt.picutils.DuplicateImagesView"
+    applicationDefaultJvmArgs = listOf("--enable-native-access=javafx.graphics")
 }
