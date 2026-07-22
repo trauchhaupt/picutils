@@ -15,7 +15,6 @@ import java.awt.image.BufferedImage;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -203,8 +202,7 @@ public class ImageInformationDto implements Comparable<ImageInformationDto> {
         return null;
     }
 
-    public LocalDateTime getDateFromExif()
-    {
+    public LocalDateTime getDateFromExif() {
         LocalDateTime returnValue = getDateFrom(MetadataTagEnum.DATE_TIME);
         if (returnValue != null)
             return returnValue;
@@ -212,15 +210,14 @@ public class ImageInformationDto implements Comparable<ImageInformationDto> {
         if (returnValue != null)
             return returnValue;
         String dateTimeString = getMetadata(MetadataTagEnum.DATE_TIME);
-        if ( dateTimeString == null || dateTimeString.isBlank())
+        if (dateTimeString == null || dateTimeString.isBlank())
             return null;
         return LocalDateTime.parse(dateTimeString, FORMATTER);
     }
 
-    public LocalDateTime getDateFrom(MetadataTagEnum tagEnum)
-    {
+    public LocalDateTime getDateFrom(MetadataTagEnum tagEnum) {
         String dateTimeString = getMetadata(tagEnum);
-        if ( dateTimeString == null || dateTimeString.isBlank())
+        if (dateTimeString == null || dateTimeString.isBlank())
             return null;
         return LocalDateTime.parse(dateTimeString, FORMATTER);
     }

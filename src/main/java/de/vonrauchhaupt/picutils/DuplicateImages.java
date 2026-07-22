@@ -39,6 +39,5 @@ public class DuplicateImages {
                 System.out.println("del " + imageInformationDto.getPath().toAbsolutePath() + " (" + imageInformationDto.getWidth() + "x" + imageInformationDto.getHeight() + ")");
             }
         }
-
     }
 }

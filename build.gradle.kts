@@ -42,10 +42,10 @@ java {
 
 javafx {
     version = "21.0.8"
-    modules = listOf("javafx.base", "javafx.graphics", "javafx.swing")
+    modules = listOf("javafx.base", "javafx.graphics", "javafx.swing", "javafx.controls")
 }
 
 application {
     // Define the main class for the application.
-    mainClass = "de.vonrauchhaupt.picutils.Scanner"
+    mainClass = "de.vonrauchhaupt.picutils.DuplicateImagesView"
 }
