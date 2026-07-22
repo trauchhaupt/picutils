@@ -137,6 +137,11 @@ public class ScannerContextDto {
             System.err.println("Missing MetadataTagEnum : \n" + String.join("\n", tagEnumsNotKnown));
         }
 
+        List<Path> nonExistingFiles = imageInformationList.keySet()
+                .stream()
+                .filter(x -> !Files.exists(x))
+                .toList();
+        nonExistingFiles.forEach(imageInformationList::remove);
         writeFileInfoXml();
         System.out.println("Finished");
     }
