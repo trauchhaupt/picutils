@@ -8,11 +8,15 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -23,6 +27,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -86,7 +91,20 @@ public class DuplicateImagesView extends Application {
         }
 
         primaryStage.setTitle("Duplicate Images");
-        primaryStage.setScene(new Scene(borderPane));
+        Scene scene = new Scene(borderPane);
+        EventHandler<KeyEvent> keyEventEventHandler = key -> {
+            if (key.getCode() == KeyCode.N && key.isControlDown()) {
+                buttonNext.fire();
+                key.consume();
+            }
+            else if (key.getCode() == KeyCode.P && key.isControlDown()) {
+                buttonPrevious.fire();
+                key.consume();
+            }
+        };
+        scene.setOnKeyPressed(keyEventEventHandler);
+        textFieldFolder.addEventFilter(KeyEvent.KEY_PRESSED, keyEventEventHandler );
+        primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
         primaryStage.show();
         primaryStage.setOnCloseRequest(x -> System.exit(0));
@@ -152,6 +170,9 @@ public class DuplicateImagesView extends Application {
         } else if (currentDisplayIndex >= groupedSimilarImagesByHash.size() - 1) {
             buttonPrevious.setDisable(false);
             buttonNext.setDisable(true);
+        } else {
+            buttonPrevious.setDisable(false);
+            buttonNext.setDisable(false);
         }
     }
 
@@ -172,6 +193,7 @@ public class DuplicateImagesView extends Application {
         groupedSimilarImagesByHash.setAll(groupedByHash.entrySet().stream()
                 .filter(x -> x.getValue().size() >= 2)
                 .map(x -> new SimilarImages(x.getKey(), x.getValue()))
+                .sorted()
                 .toList());
 
         if (groupedSimilarImagesByHash.isEmpty()) {
@@ -233,13 +255,19 @@ public class DuplicateImagesView extends Application {
         }
     }
 
-    private static class SimilarImages {
+    private static class SimilarImages implements Comparable<SimilarImages> {
         final int imageHash;
         final List<ImageInformationDto> similarImages;
 
         private SimilarImages(int imageHash, List<ImageInformationDto> similarImages) {
             this.imageHash = imageHash;
             this.similarImages = similarImages;
+            this.similarImages.sort(Comparator.naturalOrder());
+        }
+
+        @Override
+        public int compareTo(SimilarImages o) {
+            return similarImages.get(0).compareTo(o.similarImages.get(0));
         }
     }
 }
